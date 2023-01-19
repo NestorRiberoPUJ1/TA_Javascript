@@ -1,0 +1,9 @@
+.Card {
+    background-color: gold;
+    border: 2px solid goldenrod;
+    padding: 8px;
+    border-radius: 8px;
+}
+.Cartelera {
+    height: 300px;
+}

@@ -1,0 +1,7 @@
+.Formulario {
+    background-color: lightblue;
+    border: 2px solid darkblue;
+    display: flex;
+    flex-direction: column;
+    padding: 4px;
+}

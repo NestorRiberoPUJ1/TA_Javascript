@@ -1,0 +1,7 @@
+.Container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: brown;
+    padding: 8px;
+}
