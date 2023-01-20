@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import './App.css';
 import FirstClassComponent from './components/FirstClassComponent/FirstClassComponent';
+import FormularioEstudiantes from './components/FormularioEstudiantes/FormularioEstudiantes';
 import FunctionComponent from './components/FunctionComponent/FunctionComponent';
+import ListaEstudiantes from './components/ListaEstudiantes/ListaEstudiantes';
 import MovieContainer from './components/MovieContainer/MovieContainer';
 import Peliculas from './components/Peliculas/Peliculas';
 import SecondClassComponent from './components/SecondClassComponent/SecondClassComponent';
@@ -32,6 +34,11 @@ function App() {
         <Peliculas titulo={"Joker"} favorita={favorita} setFavorita={setFavorita} url="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/joker-joaquin-phoenix-heroe-villano-1567430480.jpg?crop=0.6666666666666666xw:1xh;center,top&resize=480:*" />
       </MovieContainer>
       <hr></hr>
+      <hr></hr>
+      <hr></hr>
+      <hr></hr>
+      <hr></hr>
+      <ListaEstudiantes />
     </div>
   );
 }

@@ -1,0 +1,12 @@
+.Row {
+    display: flex;
+    flex-direction: row;
+}
+
+.Col1 {
+    flex: 1;
+}
+
+.Col2 {
+    flex: 2;
+}

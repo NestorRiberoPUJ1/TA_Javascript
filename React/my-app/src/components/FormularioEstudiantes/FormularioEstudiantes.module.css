@@ -1,0 +1,18 @@
+.Formulario {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 8px;
+    background-color: aquamarine;
+    border: 2px solid dodgerblue;
+    border-radius: 12px;
+    width: fit-content;
+    padding: 16px;
+}
+.Entrada {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 8px 0px;
+}
