@@ -1,0 +1,12 @@
+.Pregunta {
+    display: flex;
+    flex-direction: row;
+    background-color: lightgray;
+    border: 2px solid lightslategrey;
+    border-radius: 4px;
+    width: fit-content;
+    min-width: 400px;
+    height: fit-content;
+    padding: 4px;
+    justify-content: space-evenly;
+}
