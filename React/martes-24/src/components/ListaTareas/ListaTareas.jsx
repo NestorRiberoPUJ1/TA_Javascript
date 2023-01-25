@@ -1,9 +1,17 @@
 
+import { useEffect } from "react";
 import { useState } from "react"
 import Tarea from "../Tarea/Tarea";
 import styles from "./ListaTareas.module.css"
 
-
+const listaDefault = [
+    { name: "Lavar el carro", status: false },
+    { name: "Sacar la basura", status: true },
+    { name: "Comprar mercado", status: false },
+    { name: "Pagar Recibos", status: false },
+    { name: "Cobrar cheques", status: true },
+    { name: "Descansar domingo", status: false },
+]
 
 const ListaTareas = () => {
 
@@ -15,7 +23,6 @@ const ListaTareas = () => {
         let aux = [...chores];
         aux.push({ name: newChore, status: false })
         setChores([...aux]);
-        console.log("Chores: ", aux);
         setNewChore("");
     }
 
@@ -30,6 +37,17 @@ const ListaTareas = () => {
         let filtered = aux.filter((value, index, array) => index !== idx)
         setChores([...filtered]);
     }
+
+    useEffect(() => {
+        console.log("Iniciando Componente...");
+        setTimeout(() => {
+            setChores(listaDefault);
+        }, 5000)
+    }, [])
+
+    useEffect(() => {
+        console.log("CHORES: ", chores)
+    }, [chores])
 
     return (
         <div>
