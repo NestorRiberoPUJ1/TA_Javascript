@@ -6,7 +6,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-
+const colorRoutes = require("./routes/colors.routes");// Incluir modulo de rutas
+colorRoutes(app);//Instancia de modulo de rutas
 
 
 app.listen(port, () => console.log(`Listening on port: ${port}`));
