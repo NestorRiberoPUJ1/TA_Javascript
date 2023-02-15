@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import './App.css';
 import axios from 'axios';
+import FilaAvion from './components/FilaAvion/FilaAvion';
 
 const App = () => {
 
@@ -25,7 +26,7 @@ const App = () => {
       plate: placa,
     }
     console.log(data);
-    axios.post("http://localhost:8000/api/aviones", data)
+    axios.post(process.env.REACT_APP_BACKEND + "/api/aviones", data)
       .then(response => response.data)
       .then(result => {
         console.log(result);
@@ -45,7 +46,7 @@ const App = () => {
   }
 
   const getPlanes = () => {
-    axios.get("http://localhost:8000/api/aviones")
+    axios.get(process.env.REACT_APP_BACKEND + "/api/aviones")
       .then(result => result.data)
       .then(response => {
         console.log(response);
@@ -91,18 +92,27 @@ const App = () => {
       </form>
       <hr></hr>
       <div>
-        {aviones.map((item, index, array) => {
-          return (
-            <div key={"avion" + index}>
-              <p>Nombre:{item.name}</p>
-              <p>Fabricante:{item.manufacturer}</p>
-              <p>Modelo:{item.model}</p>
-              <p>Millas:{item.miles}</p>
-              <p>Placa:{item.plate}</p>
-              <hr></hr>
-            </div>
-          )
-        })}
+        <table style={{ width: "100%" }}>
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Fabricante</th>
+              <th>Modelo</th>
+              <th>Millas</th>
+              <th>Placa</th>
+              <th>Editar</th>
+            </tr>
+          </thead>
+          <tbody>
+            {aviones.map((item, index, array) => {
+              return (
+                <Fragment key={"Avion" + index}>
+                  <FilaAvion item={item} />
+                </Fragment>
+              )
+            })}
+          </tbody>
+        </table>
       </div>
 
     </div>

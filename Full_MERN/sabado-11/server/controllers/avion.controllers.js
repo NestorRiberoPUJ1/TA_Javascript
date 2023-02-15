@@ -27,3 +27,10 @@ module.exports.createAviones = (req, res) => {
         })
 
 }
+
+module.exports.updateAvion = (request, response) => {
+    Avion.findOneAndUpdate({ _id: request.params.id }, request.body, { new: true })
+        .then(updatedAvion => response.json(updatedAvion))
+        .catch(err => response.json(err))
+}
+
