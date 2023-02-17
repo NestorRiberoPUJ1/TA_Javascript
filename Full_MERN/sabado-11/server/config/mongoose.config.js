@@ -1,6 +1,6 @@
 const mongoose = require("mongoose"); // Importando el paquete mongoose
 
-
+mongoose.set('strictQuery', false);
 mongoose.connect("mongodb://localhost/avionesDB", { //se realiza la conexión a mongo DB por localhost
     useNewUrlParser: true,
     useUnifiedTopology: true,
