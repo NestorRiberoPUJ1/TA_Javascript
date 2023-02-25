@@ -21,7 +21,13 @@ module.exports = (httpServer) => {
             socket.emit("Welcome", payload);
             socket.broadcast.emit("Welcome", "New user connected");
             io.emit("Welcome", "Message for all");
+        });
+        socket.on(socket.id, data => {
+            console.log("Mensaje de " + socket.id, data);
+            socket.emit(socket.id, `Mensaje Recibido: ${data}`);
         })
+
+
     });
 
 }
