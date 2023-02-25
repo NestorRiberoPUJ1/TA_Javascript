@@ -14,7 +14,12 @@ module.exports = (httpServer) => {
         socket.on("update", data => {
             console.log("Update", data);
             io.emit("update", data);
+        });
+
+        socket.on("message", (data) => {
+            socket.broadcast.emit("message", { sender: socket.id, data: data });
         })
+
     });
 
 }
