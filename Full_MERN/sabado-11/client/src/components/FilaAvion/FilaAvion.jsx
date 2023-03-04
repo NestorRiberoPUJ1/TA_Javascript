@@ -50,6 +50,7 @@ const FilaAvion = (props) => {
 
     return (
         <tr>
+            <td><img src={"http://localhost:8000/files/" + props.item.url} alt="airplane image" height={150} /></td>
             <td><input type="text" value={name} onChange={(e) => setName(e.target.value)} disabled={!edicion} /></td>
             <td><input type="text" value={manufacturer} onChange={(e) => setManufacturer(e.target.value)} disabled={!edicion} /></td>
             <td><input type="text" value={model} onChange={(e) => setModel(e.target.value)} disabled={!edicion} /></td>

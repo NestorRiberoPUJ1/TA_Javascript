@@ -1,6 +1,6 @@
 const Avion = require("../models/aviones.model");
-const { upload } = require("../config/multer.config");
-const multer = require("multer");
+
+const path = require("path")
 
 module.exports.getAviones = (req, res) => {
     Avion.find()
@@ -17,40 +17,34 @@ module.exports.getAviones = (req, res) => {
 }
 
 module.exports.createAviones = (req, res) => {
-    let data = req.body;
+    let data = JSON.parse(req.body.data);
 
-    console.log(req.body);
-    const result_upload = upload.single('file');
+    console.log(req.file.filename);
+    console.log(data);
+    data.url = req.file.filename; 
 
-    result_upload(req, res, (err) => {
-        console.log(err);
-        if (err instanceof multer.MulterError) {
-            // A Multer error occurred when uploading.
+    Avion.create(data)
+        .then(avion => {
+            res.status(200);
+            res.json(avion);
+        })
+        .catch(error => {
             res.status(500);
-            res.json(err);
-        } else if (err) {
-            // An unknown error occurred when uploading.
-            res.status(500);
-            res.json(err);
-        }
-        else {
-            Avion.create(data)
-                .then(avion => {
-                    res.status(200);
-                    res.json(avion);
-                })
-                .catch(error => {
-                    res.status(500);
-                    res.json(error);
-                })
-        }
-    })
-
+            res.json(error);
+        })
 }
+
 
 module.exports.updateAvion = (request, response) => {
     Avion.findOneAndUpdate({ _id: request.params.id }, request.body, { new: true })
         .then(updatedAvion => response.json(updatedAvion))
         .catch(err => response.json(err))
+}
+
+module.exports.getFile = (req, res) => {
+    const filepath = "./uploads/" + req.params.filename;
+    console.log(filepath);
+    let absolutePath = path.resolve(filepath);
+    res.sendFile(absolutePath);
 }
 

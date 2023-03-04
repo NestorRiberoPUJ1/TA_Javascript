@@ -6,6 +6,7 @@ import FilaAvion from './components/FilaAvion/FilaAvion';
 const App = () => {
 
 
+  const [image, setImage] = useState({ preview: '', data: '' })
   const [nombre, setNombre] = useState("");
   const [modelo, setModelo] = useState("");
   const [millas, setMillas] = useState("");
@@ -18,15 +19,29 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let data = {
-      name: nombre,
-      model: modelo,
-      miles: millas,
-      manufacturer: fabricante,
-      plate: placa,
-    }
+    let data = JSON.stringify(
+      {
+        name: nombre,
+        model: modelo,
+        miles: millas,
+        manufacturer: fabricante,
+        plate: placa,
+      }
+    );
+
+    let formData = new FormData();
+
+    formData.append('file', image.data);
+    formData.append('data', data)
+
+
+
     console.log(data);
-    axios.post(process.env.REACT_APP_BACKEND + "/api/aviones", data)
+    axios.post(process.env.REACT_APP_BACKEND + "/api/aviones", formData, {
+      headers: {
+        'content-type': 'multipart/form-data'
+      }
+    })
       .then(response => response.data)
       .then(result => {
         console.log(result);
@@ -41,7 +56,9 @@ const App = () => {
       })
       .catch(error => {
         console.log(error.response.data.errors);
-        setErrors(error.response.data.errors);
+        if (error.response.data.errors != undefined) {
+          setErrors(error.response.data.errors);
+        }
       })
   }
 
@@ -59,10 +76,22 @@ const App = () => {
     getPlanes();
   }, [])
 
+  const handleFileChange = (e) => {
+    const img = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0]
+    }
+    setImage(img);
+  }
+
   return (
     <div className="App">
 
       <form onSubmit={handleSubmit} >
+        <div>
+          <label>Imagen:</label>
+          <input type="file" name="file" onChange={handleFileChange} accept='image/jpg, image/jpeg' />
+        </div>
         <div>
           <label>Nombre:</label>
           <input type="text" value={nombre} onChange={(e) => setNombre(e.target.value)} />
@@ -95,6 +124,7 @@ const App = () => {
         <table style={{ width: "100%" }}>
           <thead>
             <tr>
+              <th>Image</th>
               <th>Nombre</th>
               <th>Fabricante</th>
               <th>Modelo</th>
