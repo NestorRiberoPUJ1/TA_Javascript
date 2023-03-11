@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import { Button, TextField } from '@mui/material'
 
 import axios from 'axios'
+import { FirstContext } from "../../context/FirstContext";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [formErrors, setFormErrors] = useState({});
+
+    const { setUser } = useContext(FirstContext);
+
+    const navigate = useNavigate();
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -30,6 +36,9 @@ const Login = () => {
             .then((response) => {
                 console.log(response);
                 setFormErrors({});
+                setUser(response);
+                sessionStorage.setItem("user", JSON.stringify(response));
+                navigate("/welcome")
             })
             .catch((errors) => {
                 console.log(errors.response.data);

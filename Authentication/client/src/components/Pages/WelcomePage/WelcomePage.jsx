@@ -1,29 +1,27 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FirstContext } from "../../../context/FirstContext";
 
 
 
 const WelcomePage = () => {
 
+    const { user, admin, validateAdmin } = useContext(FirstContext);
     const navigate = useNavigate();
-    const [valid, setValid] = useState(false);
 
     useEffect(() => {
-        axios.get("http://localhost:8000/api/admin", { withCredentials: true })
-            .then(() => {
-                console.log("OK");
-                setValid(true);
-            })
-            .catch(error => {
-                console.log(error);
-                navigate("/");
-            })
-    })
+        validateAdmin();
+    }, [])
+    useEffect(() => {
+        if (admin === false) {
+            navigate("/");
+        }
+        console.log(user);
+    }, [admin])
 
     return (
         <>
-            {valid ?
+            {admin ?
                 <h1>
                     WELCOME PAGE
                 </h1>

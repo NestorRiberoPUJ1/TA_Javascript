@@ -1,8 +1,14 @@
-import { Fragment } from "react"
+import { Fragment, useContext, useEffect } from "react"
+import { FirstContext } from "../../../context/FirstContext";
 import LoginRegister from "../../LoginRegister/LoginRegister"
 
 
 const LoginPage = () => {
+
+    const context = useContext(FirstContext);
+    useEffect(() => {
+        console.log(context);
+    }, [])
 
     return (
         <Fragment>

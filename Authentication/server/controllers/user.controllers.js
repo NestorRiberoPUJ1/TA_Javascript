@@ -46,7 +46,7 @@ module.exports.login = (req, res) => {
                             res.cookie("usertoken", myJWT, secret_key, {
                                 httpOnly: true
                             })
-                                .json({ message: "Inicio de sesión correcto" })
+                                .json(user)
 
 
                         } else {
